@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML5 Features & Form Showcase</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #4361ee;
+            --secondary: #3f37c9;
+            --accent: #4895ef;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #4cc9f0;
+            --warning: #f72585;
+            --gray: #6c757d;
+            --border: #dee2e6;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf9 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            margin-bottom: 30px;
+            background: linear-gradient(120deg, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+            transform: rotate(30deg);
+        }
+
+        header h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            position: relative;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        header p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .features-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-header {
+            background: var(--primary);
+            color: white;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .card-header i {
+            font-size: 1.8rem;
+        }
+
+        .card-content {
+            padding: 25px;
+        }
+
+        .feature-list {
+            list-style: none;
+        }
+
+        .feature-list li {
+            padding: 12px 0;
+            border-bottom: 1px dashed var(--border);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .feature-list li:last-child {
+            border-bottom: none;
+        }
+
+        .feature-list li i {
+            color: var(--accent);
+            font-size: 1.2rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            background-color: rgba(67, 97, 238, 0.1);
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background-color: rgba(67, 97, 238, 0.05);
+        }
+
+        .media-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .media-item {
+            flex: 1;
+            min-width: 250px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .media-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .media-item video {
+            width: 100%;
+            display: block;
+        }
+
+        .media-caption {
+            padding: 12px;
+            background: white;
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+
+        .form-section {
+            background: white;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            margin-bottom: 40px;
+        }
+
+        .form-header {
+            background: linear-gradient(120deg, var(--secondary), #2a28a8);
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+
+        .form-container {
+            padding: 30px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .required::after {
+            content: " *";
+            color: var(--warning);
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 4px rgba(67, 97, 238, 0.2);
+        }
+
+        input[type="checkbox"], input[type="radio"] {
+            width: auto;
+            margin-right: 10px;
+        }
+
+        .checkbox-group, .radio-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 8px;
+        }
+
+        .checkbox-item, .radio-item {
+            display: flex;
+            align-items: center;
+        }
+
+        fieldset {
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+
+        legend {
+            padding: 0 10px;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 14px 28px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .submit-btn {
+            background: linear-gradient(120deg, var(--primary), var(--secondary));
+            color: white;
+        }
+
+        .submit-btn:hover {
+            background: linear-gradient(120deg, #3a56e0, #2a28a8);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(67, 97, 238, 0.3);
+        }
+
+        .reset-btn {
+            background: var(--light);
+            color: var(--gray);
+            border: 1px solid var(--border);
+        }
+
+        .reset-btn:hover {
+            background: #e9ecef;
+        }
+
+        input:invalid {
+            border-color: #ff6b6b;
+        }
+
+        input:valid {
+            border-color: #51cf66;
+        }
+
+        .hint {
+            font-size: 0.85rem;
+            color: var(--gray);
+            margin-top: 6px;
+            display: block;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: var(--gray);
+            font-size: 0.95rem;
+        }
+
+        @media (max-width: 768px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .btn-group {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>HTML5 Features & Form Showcase</h1>
+            <p>Explore modern HTML5 elements and experience a comprehensive form with built-in validation</p>
+        </header>
+        
+        <section class="features-section">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-list"></i>
+                    <h2>HTML5 Lists</h2>
+                </div>
+                <div class="card-content">
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check-circle"></i> Semantic elements for better structure</li>
+                        <li><i class="fas fa-check-circle"></i> Native form validation without JavaScript</li>
+                        <li><i class="fas fa-check-circle"></i> Enhanced media support (audio & video)</li>
+                        <li><i class="fas fa-check-circle"></i> Geolocation API integration</li>
+                        <li><i class="fas fa-check-circle"></i> Local storage capabilities</li>
+                        <li><i class="fas fa-check-circle"></i> Responsive image support</li>
+                        <li><i class="fas fa-check-circle"></i> Improved accessibility features</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-table"></i>
+                    <h2>HTML5 Tables</h2>
+                </div>
+                <div class="card-content">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Feature</th>
+                                <th>Description</th>
+                                <th>Support</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Form Validation</td>
+                                <td>Built-in input validation</td>
+                                <td>All modern browsers</td>
+                            </tr>
+                            <tr>
+                                <td>Semantic Tags</td>
+                                <td>header, footer, section, etc.</td>
+                                <td>IE9+</td>
+                            </tr>
+                            <tr>
+                                <td>Canvas</td>
+                                <td>Dynamic graphics rendering</td>
+                                <td>All modern browsers</td>
+                            </tr>
+                            <tr>
+                                <td>Geolocation</td>
+                                <td>User location detection</td>
+                                <td>HTTPS required</td>
+                            </tr>
+                            <tr>
+                                <td>Web Storage</td>
+                                <td>Local and session storage</td>
+                                <td>All modern browsers</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-photo-video"></i>
+                    <h2>HTML5 Media</h2>
+                </div>
+                <div class="card-content">
+                    <div class="media-container">
+                        <div class="media-item">
+                            <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=600&h=400" alt="Coding example">
+                            <div class="media-caption">HTML5 enables rich media experiences</div>
+                        </div>
+                        <div class="media-item">
+                            <video controls>
+                                <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                            <div class="media-caption">Native video player with controls</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="form-section">
+            <div class="form-header">
+                <h2>Registration Form</h2>
+                <p>Complete the form below with HTML5 validation</p>
+            </div>
+            
+            <div class="form-container">
+                <form id="registrationForm" novalidate>
+                    <div class="form-grid">
+                        <fieldset>
+                            <legend>Personal Information</legend>
+                            
+                            <div class="form-group">
+                                <label for="fullName" class="required">Full Name</label>
+                                <input type="text" id="fullName" name="fullName" 
+                                       placeholder="Enter your full name" 
+                                       required 
+                                       minlength="3"
+                                       autocomplete="name">
+                                <span class="hint">Minimum 3 characters</span>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email" class="required">Email Address</label>
+                                <input type="email" id="email" name="email" 
+                                       placeholder="your.email@example.com" 
+                                       required 
+                                       autocomplete="email">
+                                <span class="hint">Must be a valid email format</span>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" id="phone" name="phone" 
+                                       placeholder="(123) 456-7890" 
+                                       pattern="^\(?\d{3}\)?[-\s]?\d{3}[-\s]?\d{4}$"
+                                       autocomplete="tel">
+                                <span class="hint">Format: (123) 456-7890</span>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="birthdate" class="required">Date of Birth</label>
+                                <input type="date" id="birthdate" name="birthdate" 
+                                       required 
+                                       min="1900-01-01" 
+                                       max="2023-12-31">
+                            </div>
+                        </fieldset>
+                        
+                        <fieldset>
+                            <legend>Account Details</legend>
+                            
+                            <div class="form-group">
+                                <label for="username" class="required">Username</label>
+                                <input type="text" id="username" name="username" 
+                                       placeholder="Choose a username" 
+                                       required 
+                                       minlength="4" 
+                                       maxlength="20" 
+                                       autocomplete="username">
+                                <span class="hint">4-20 characters</span>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="password" class="required">Password</label>
+                                <input type="password" id="password" name="password" 
+                                       placeholder="Create a strong password" 
+                                       required 
+                                       minlength="8" 
+                                       autocomplete="new-password">
+                                <span class="hint">Minimum 8 characters</span>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="website">Personal Website</label>
+                                <input type="url" id="website" name="website" 
+                                       placeholder="https://example.com"
+                                       autocomplete="url">
+                                <span class="hint">Must be a valid URL</span>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="userRating">Rate your experience (1-10)</label>
+                                <input type="range" id="userRating" name="userRating" 
+                                       min="1" max="10" value="5">
+                            </div>
+                        </fieldset>
+                    </div>
+                    
+                    <div class="form-grid">
+                        <fieldset>
+                            <legend>Preferences</legend>
+                            
+                            <div class="form-group">
+                                <label>Subscription Type</label>
+                                <div class="radio-group">
+                                    <div class="radio-item">
+                                        <input type="radio" id="free" name="subscription" value="free" checked>
+                                        <label for="free">Free</label>
+                                    </div>
+                                    <div class="radio-item">
+                                        <input type="radio" id="premium" name="subscription" value="premium">
+                                        <label for="premium">Premium ($9.99)</label>
+                                    </div>
+                                    <div class="radio-item">
+                                        <input type="radio" id="enterprise" name="subscription" value="enterprise">
+                                        <label for="enterprise">Enterprise ($29.99)</label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Communication Preferences</label>
+                                <div class="checkbox-group">
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" id="emailNews" name="emailNews" checked>
+                                        <label for="emailNews">Email Newsletter</label>
+                                    </div>
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" id="productUpdates" name="productUpdates" checked>
+                                        <label for="productUpdates">Product Updates</label>
+                                    </div>
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" id="promotions" name="promotions">
+                                        <label for="promotions">Promotional Offers</label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="theme">Theme Preference</label>
+                                <select id="theme" name="theme">
+                                    <option value="light">Light Theme</option>
+                                    <option value="dark">Dark Theme</option>
+                                    <option value="system">System Default</option>
+                                </select>
+                            </div>
+                        </fieldset>
+                        
+                        <fieldset>
+                            <legend>Additional Information</legend>
+                            
+                            <div class="form-group">
+                                <label for="bio">Biography</label>
+                                <textarea id="bio" name="bio" 
+                                          placeholder="Tell us about yourself..." 
+                                          rows="4"></textarea>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="profileColor">Profile Color</label>
+                                <input type="color" id="profileColor" name="profileColor" 
+                                       value="#4361ee">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="avatar">Profile Picture</label>
+                                <input type="file" id="avatar" name="avatar" 
+                                       accept="image/png, image/jpeg">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="referenceId">Reference ID</label>
+                                <input type="text" id="referenceId" name="referenceId" 
+                                       value="REF-2023-001" 
+                                       readonly>
+                            </div>
+                        </fieldset>
+                    </div>
+                    
+                    <div class="btn-group">
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-paper-plane"></i> Submit Form
+                        </button>
+                        <button type="reset" class="reset-btn">
+                            <i class="fas fa-redo"></i> Reset Form
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </section>
+        
+        <footer>
+            <p>© 2023 HTML5 Features & Form Showcase | Demonstrating Modern Web Technologies</p>
+            <p>Built with HTML5, CSS3, and semantic markup - No JavaScript validation used</p>
+        </footer>
+    </div>
+</body>
+</html>
